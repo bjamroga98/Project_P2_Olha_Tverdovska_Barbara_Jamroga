@@ -3,8 +3,15 @@
 module.exports = (app) => {
     const indexController = require('../../back/Controller/IndexController')
     const usersController = require('../Controller/UserController')
+    const shelfController = require('../Controller/ShelfController')
 
-    app.route('/').get(indexController.index)
-    app.route('/users').get(usersController.users)
-    app.route('users/add').post(usersController.add)
+    app
+        .route('/api/users')
+        .get(usersController.getAllUsers)
+    app
+        .route('/api/auth/signup')
+        .post(usersController.signup)
+    app
+        .route('/api/shelfs')
+        .get(shelfController.getAllShelfs)
 }

@@ -5,7 +5,7 @@ export class Exit{
     public draw():void {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y,this.width,this.height);
-        this.name()
+        //this.name()
     }
 
     private name():void{

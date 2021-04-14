@@ -1,0 +1,30 @@
+::ng-deep .p-menu{
+    border-radius: none;
+    border: none;
+}
+::ng-deep.p-menuitem a:hover{
+    background: none
+}
+.container{
+    padding: 20px 0px; 
+    display: flex; 
+    align-items: center; 
+    flex-direction: column; 
+    width: 250px;
+    height: 100%;
+}
+.side-logo{
+    height: 40px;
+}
+.side-btn{
+    width: 200px; 
+    margin-top: 60px; 
+    margin-bottom: 30px;
+}
+.wrap-img{
+    margin-top: auto;
+}
+.wrap-img img{
+    width: 100%; 
+    height: 100px;
+}

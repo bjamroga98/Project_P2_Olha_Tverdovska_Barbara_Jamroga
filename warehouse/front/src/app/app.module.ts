@@ -8,11 +8,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
 import {SlideMenuModule} from 'primeng/slidemenu';
+import {ToolbarModule} from 'primeng/toolbar';
+import {InputTextModule} from 'primeng/inputtext';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+//Components
 import { MenuComponent } from './menu/menu.component';
+import { VirtualMapComponent } from './virtual-map/virtual-map.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
+    VirtualMapComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +26,10 @@ import { MenuComponent } from './menu/menu.component';
     ButtonModule,
     MenuModule,
     SlideMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToolbarModule,
+    InputTextModule,
+    DynamicDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

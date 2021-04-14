@@ -1,0 +1,27 @@
+::ng-deep p-toolbar{
+    height: 100px;
+    width: 90%;
+
+}
+.container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0px;
+}
+.search{
+    width: 100%;
+}
+.search input{
+    width: 100%;
+    border-color: #d8d5da;
+}
+.search i{
+    color: #7349BD;
+    font-weight: 900;
+}
+.map {
+    width: 90%;
+    height: 80%;
+}

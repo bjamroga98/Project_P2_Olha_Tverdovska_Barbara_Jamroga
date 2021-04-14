@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    height: 100vh
+}
+.menu{
+    width: max-content;
+    height: 100%;
+    display: flex;
+}
+.wpar-content{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.top-nav{
+    height: 80px;
+    background: #FCFCFC;
+    width: 100%;
+}
+.content{
+    height: 100%;
+    background: #F5F6FA;
+    width: 100%;
+}

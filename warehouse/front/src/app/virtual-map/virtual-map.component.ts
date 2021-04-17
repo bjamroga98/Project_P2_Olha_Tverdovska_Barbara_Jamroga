@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Exit} from './exit'
+import {Shelf} from './shelf'
+import {FakeData} from './fakeData'
 
 @Component({
   selector: 'app-virtual-map',
@@ -17,19 +19,30 @@ export class VirtualMapComponent implements OnInit {
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.ctx.fillStyle = "white";
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-
-    const exit1 = new Exit(this.ctx,"green",0,(this.ctx.canvas.height/2-75),60,150);
-    exit1.draw()
-
-    const exit2 = new Exit(this.ctx,"green",this.ctx.canvas.width - 60,(this.ctx.canvas.height/2-75),60,150);
-    exit2.draw()
-  }
-  animate(): void {
-
+    this.drawExits()
+    this.drawShelfs()
   }
 
-  draw(x: number, y: number, z: number) {
-    this.ctx.fillRect(z * x, z * y, z, z);
+  drawExits():void{
+    const data = new FakeData(this.ctx);
+    const exits = data.getExits()
+
+    exits.forEach(element => {
+      const extit = new Exit(element.ctx, element.color, element.xPosition, element.yPosition, element.width, element.height, element.imgSrc);
+      extit.draw()
+    });
+  }
+
+  drawShelfs():void{
+    
+    const data = new FakeData(this.ctx);
+    const shelfs = data.getShelfs()
+
+    shelfs.forEach(element => {
+      const shelfs = new Shelf(element.ctx, element.color, element.xPosition, element.yPosition, element.width, element.height, element.name);
+      shelfs.draw()
+    });
+
   }
 
 }

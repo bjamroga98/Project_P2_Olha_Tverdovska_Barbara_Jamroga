@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,11 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 //Components
 import { MenuComponent } from './menu/menu.component';
 import { VirtualMapComponent } from './virtual-map/virtual-map.component';
+
+//Services
+import{WarehouseService} from '../services/warehouse.service'
+import{ShelfsService} from '../services/shelfs.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +35,10 @@ import { VirtualMapComponent } from './virtual-map/virtual-map.component';
     BrowserAnimationsModule,
     ToolbarModule,
     InputTextModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [WarehouseService,ShelfsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

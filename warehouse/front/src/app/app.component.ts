@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Params } from '@angular/router';
+import { ShelfsService } from 'src/services/shelfs.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,13 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  
+  constructor(private shelfsServise : ShelfsService){}
+
+  ngOnInit(){
+   this.shelfsServise.getShelfs().subscribe(
+     (params : Params) => {
+      console.log(params)
+     }
+   );
+  }
 }

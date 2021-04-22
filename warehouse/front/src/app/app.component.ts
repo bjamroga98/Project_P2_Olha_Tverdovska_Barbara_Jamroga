@@ -12,10 +12,6 @@ export class AppComponent {
   constructor(private shelfsServise : ShelfsService){}
 
   ngOnInit(){
-   this.shelfsServise.getShelfs().subscribe(
-     (params : Params) => {
-      console.log(params)
-     }
-   );
+
   }
 }

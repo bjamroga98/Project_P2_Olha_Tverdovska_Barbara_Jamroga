@@ -14,4 +14,7 @@ module.exports = (app) => {
     app
         .route('/api/shelfs')
         .get(shelfController.getAllShelfs)
+    app
+    .route('/api/shelfs/locate/:id')
+    .get(shelfController.getShelfLocation)
 }

@@ -6,17 +6,17 @@ export class Exit{
     public draw():void {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y,this.width,this.height);
-        this.drive()
+        this.drawImg(this.ctx, this.x,this.y)
     }
 
 
-    public drive(){
-        var img = new Image();
-        img.src = this.imgSrc
-        var ctx = this.ctx;
-        img.onload = function() {
-            ctx.drawImage(img, 0, 0);
-        };
+    public drawImg(ctx, x, y)
+    {
+      var base_image = new Image();
+      base_image.src = '../../assets/img/door.png';
+      base_image.onload = function(){
+        ctx.drawImage(base_image, (x+5), (y+50), 50, 50);
+      }
     }
     
 }

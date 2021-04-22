@@ -3,7 +3,7 @@ import {Exit} from './exit'
 import {Shelf} from './shelf'
 import {Exits_data} from './Exits_data'
 import { ShelfsService } from '../../services/shelfs.service'
-import { Params } from '@angular/router';
+//import { Params } from '../../assets/img/door.png';
 
 @Component({
   selector: 'app-virtual-map',
@@ -26,6 +26,7 @@ export class VirtualMapComponent implements OnInit {
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.drawExits()
     this.drawShelfs()
+   // this.fmake_base(this.ctx)
   }
 
   drawExits():void{
@@ -49,5 +50,6 @@ export class VirtualMapComponent implements OnInit {
       });
     })
   }
+  
 
 }

@@ -2,9 +2,10 @@
     <p-toolbar>
         <span class="p-input-icon-left search">
             <i class="pi pi-search"></i>
-            <input type="text" pInputText  placeholder="Podaj kod produktu">         
+            <input type="text" pInputText  placeholder="Podaj kod produktu" [ngModel]="code" (ngModelChange)="productCodeChange($event)">    
         </span>
     </p-toolbar>
+    <p class="error">{{errorMessage}}</p>
     <canvas class="map" #canvas height="700" width="1500">
 
 

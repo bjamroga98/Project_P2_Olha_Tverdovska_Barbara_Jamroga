@@ -11,4 +11,7 @@ export class ShelfsService {
   getShelfs(){
     return this.warehouseService.get('api/shelfs')
   }
+  getShelfsWithProductCode(productCode:string){
+    return this.warehouseService.get(`api/shelfs/locate/${productCode}`)
+  }
 }

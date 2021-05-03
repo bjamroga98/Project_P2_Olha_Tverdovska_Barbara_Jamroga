@@ -12,10 +12,10 @@ export class Exit{
 
     public drawImg(ctx, x, y)
     {
-      var base_image = new Image();
-      base_image.src = '../../assets/img/door.png';
-      base_image.onload = function(){
-        ctx.drawImage(base_image, (x+5), (y+50), 50, 50);
+      var exit_image = new Image();
+      exit_image.src = '../../assets/img/door.png';
+      exit_image.onload = function(){
+        ctx.drawImage(exit_image, (x+5), (y+50), 50, 50);
       }
     }
     

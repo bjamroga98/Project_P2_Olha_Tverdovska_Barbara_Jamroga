@@ -1,9 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {Exit} from './exit'
 import {Shelf} from './shelf'
 import {Exits_data} from './Exits_data'
-import { ShelfsService } from '../../services/shelfs.service'
-//import { Params } from '../../assets/img/door.png';
+import {ProductLocation} from './productLocation'
+import { ShelfsService } from '../../services/shelfs.service';
 
 @Component({
   selector: 'app-virtual-map',
@@ -15,10 +15,13 @@ export class VirtualMapComponent implements OnInit {
   @ViewChild('canvas', {static:true})
   canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
+
+  code = '';
+  errorMessage = '';
+
   constructor(private shelfsServise : ShelfsService){
 
   }
-
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
@@ -26,7 +29,6 @@ export class VirtualMapComponent implements OnInit {
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.drawExits()
     this.drawShelfs()
-   // this.fmake_base(this.ctx)
   }
 
   drawExits():void{
@@ -46,10 +48,35 @@ export class VirtualMapComponent implements OnInit {
       shelfs.forEach(element => {
         const shelfs = new Shelf(this.ctx, element.SLF_COLOR, element.SLF_CRD_X, element.SLF_CRD_Y, element.SLF_WIDTH, element.SLF_HEIGHT, element.SLF_NAME);
         shelfs.draw()
-        console.log(element.SLF_NAME)
       });
     })
   }
+
+  
+  productCodeChange(e) {
+    this.code = e;
+    var pattern = /^[0-9]{8}?$/;
+    if(pattern.test(this.code)){
+      let shelf
+      this.shelfsServise.getShelfsWithProductCode(this.code).subscribe((data:any [])=>{
+        shelf = data.values;
+        console.log(shelf)
+        shelf.forEach(element => {
+          var currentShelf = new ProductLocation(this.ctx,"#7E44C2", element.SLF_CRD_X, element.SLF_CRD_Y, element.SLF_WIDTH,element.SLF_HEIGHT,element.SLF_NAME)
+          currentShelf.draw();
+        });
+        
+      })
+      this.errorMessage = " "
+      
+    }
+    else{
+      console.log("kod jest zakrotki")
+      this.errorMessage = "Wprowadź poprawny kod"
+      this.drawShelfs()
+    }
+  }
+
   
 
 }

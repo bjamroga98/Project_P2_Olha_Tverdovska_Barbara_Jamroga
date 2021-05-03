@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { FormsModule } from '@angular/forms';
 // CSS Libary
 import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
@@ -36,7 +37,8 @@ import{ShelfsService} from '../services/shelfs.service'
     ToolbarModule,
     InputTextModule,
     DynamicDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [WarehouseService,ShelfsService],
   bootstrap: [AppComponent]

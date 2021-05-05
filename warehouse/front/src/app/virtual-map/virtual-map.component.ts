@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Exit} from './exit'
 import {Shelf} from './shelf'
 import {Exits_data} from './Exits_data'
@@ -69,6 +69,9 @@ export class VirtualMapComponent implements OnInit {
       })
       this.errorMessage = " "
       
+    }
+    else if (this.code == ""){
+      this.errorMessage = " "
     }
     else{
       console.log("kod jest zakrotki")

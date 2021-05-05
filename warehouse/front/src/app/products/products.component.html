@@ -1,0 +1,22 @@
+<p-table [value]="products" styleClass="p-datatable-striped">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.PRD_NAME}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+<!-- <div *ngFor = "let product of products">
+    <p>{{product.PRD_NAME}}</p>
+</div>
+<li *ngFor="let hero of products"></li> -->

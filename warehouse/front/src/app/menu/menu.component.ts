@@ -12,10 +12,10 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
       this.items = [
-          {label: 'Wyszukaj', icon: 'pi pi-fw pi-search'},
+          {label: 'Mapa', icon: 'pi pi-fw pi-map', routerLink: '/'},
           {label: 'Profil', icon: 'pi pi-fw pi-user'},
           {label: 'Zamwienia', icon: 'pi pi-fw pi-tag'},
-          {label: 'Artukuły', icon: 'pi pi-fw pi-shopping-cart'},
+          {label: 'Artukuły', icon: 'pi pi-fw pi-shopping-cart', routerLink: 'products'},
           {label: 'Statystyki', icon: 'pi pi-fw pi-chart-bar'},
           {label: 'Użytkownicy', icon: 'pi pi-fw pi-user-edit'},
           {label: 'Moje notatki', icon: 'pi pi-fw pi-pencil'},

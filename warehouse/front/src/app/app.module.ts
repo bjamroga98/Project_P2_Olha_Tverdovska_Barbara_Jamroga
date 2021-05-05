@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FormsModule } from '@angular/forms';
@@ -13,19 +13,23 @@ import {SlideMenuModule} from 'primeng/slidemenu';
 import {ToolbarModule} from 'primeng/toolbar';
 import {InputTextModule} from 'primeng/inputtext';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+
+import {TableModule} from 'primeng/table';
 //Components
 import { MenuComponent } from './menu/menu.component';
-import { VirtualMapComponent } from './virtual-map/virtual-map.component';
+//import { VirtualMapComponent } from './virtual-map/virtual-map.component';
+//import { ProductsComponent } from './products/products.component'
 
 //Services
 import{WarehouseService} from '../services/warehouse.service'
-import{ShelfsService} from '../services/shelfs.service'
+import{ShelfsService} from '../services/shelfs.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    VirtualMapComponent
+    RoutingComponents
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,9 @@ import{ShelfsService} from '../services/shelfs.service'
     InputTextModule,
     DynamicDialogModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    TableModule
+  
   ],
   providers: [WarehouseService,ShelfsService],
   bootstrap: [AppComponent]

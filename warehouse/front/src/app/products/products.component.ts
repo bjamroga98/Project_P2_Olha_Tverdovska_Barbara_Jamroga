@@ -12,6 +12,7 @@ import {Product} from './product'
 export class ProductsComponent implements OnInit {
 
   products:any
+  selectedProduct:any
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {

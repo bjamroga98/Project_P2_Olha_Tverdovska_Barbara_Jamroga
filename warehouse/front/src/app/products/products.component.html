@@ -1,22 +1,74 @@
-<p-table [value]="products" styleClass="p-datatable-striped">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Quantity</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr>
-            <td>{{product.PRD_NAME}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.category}}</td>
-            <td>{{product.quantity}}</td>
-        </tr>
-    </ng-template>
-</p-table>
-<!-- <div *ngFor = "let product of products">
-    <p>{{product.PRD_NAME}}</p>
+<!-- 
+<div class="container">
+    <p-table [value]="products" styleClass="p-datatable-striped">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Kod Produktu</th>
+                <th>Nazwa Productu</th>
+                <th>Ilość dostępna w magazynie</th>
+                <th>Waga</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.PRD_CODE}}</td>
+                <td>{{product.PRD_NAME}}</td>
+                <td>{{product.PRD_COUNT}}</td>
+                <td>{{product.PRD_WEIGHT}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div> -->
+
+<div class="container">
+    <p-table #dt1 [value]="products" selectionMode="single" [(selection)]="selectedProduct" dataKey="id" styleClass="p-datatable-customers"
+        [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="PRD_CODE">Kod Produktu <p-sortIcon field="PRD_CODE"></p-sortIcon></th>
+                <th pSortableColumn="PRD_NAME">Nazwa Produktu <p-sortIcon field="PRD_NAME"></p-sortIcon></th>
+                <th pSortableColumn="PRD_COUNT">Ilość<p-sortIcon field="PRD_COUNT"></p-sortIcon></th>
+                <th pSortableColumn="PRD_WEIGHT">Waga <p-sortIcon field="PRD_WEIGHT"></p-sortIcon></th>
+            </tr>
+            <tr>
+                <th>
+                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'PRD_CODE', 'contains')" [value]="dt1.filters['PRD_CODE']?.value" placeholder="Search by Country" class="p-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'PRD_NAME', 'contains')" [value]="dt1.filters['PRD_NAME']?.value" placeholder="Search by Country" class="p-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'PRD_COUNT', 'contains')" [value]="dt1.filters['PRD_COUNT']?.value" placeholder="Search by Representative" class="p-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'PRD_WEIGHT', 'contains')" [value]="dt1.filters['PRD_WEIGHT']?.value" placeholder="Search by Status" class="p-column-filter">
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr [pSelectableRow]="selectedProduct">
+                <td>
+                    <span class="p-column-title"></span>
+                    {{product.PRD_CODE}}
+                </td>
+                <td>
+                    <span class="p-column-title"></span>
+                    {{product.PRD_NAME}}
+                </td>
+                <td>
+                    <span class="p-column-title"></span>
+                    {{product.PRD_COUNT}}
+                </td>
+                <td>
+                    <span class="p-column-title"></span>
+                    {{product.PRD_WEIGHT}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4">No customers found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
-<li *ngFor="let hero of products"></li> -->

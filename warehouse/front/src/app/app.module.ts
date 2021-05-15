@@ -13,8 +13,8 @@ import {SlideMenuModule} from 'primeng/slidemenu';
 import {ToolbarModule} from 'primeng/toolbar';
 import {InputTextModule} from 'primeng/inputtext';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
-
 import {TableModule} from 'primeng/table';
+import {CardModule} from 'primeng/card';
 //Components
 import { MenuComponent } from './menu/menu.component';
 //import { VirtualMapComponent } from './virtual-map/virtual-map.component';
@@ -23,13 +23,15 @@ import { MenuComponent } from './menu/menu.component';
 //Services
 import{WarehouseService} from '../services/warehouse.service'
 import{ShelfsService} from '../services/shelfs.service';
+import { CreatorComponent } from './creator/creator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    RoutingComponents
+    RoutingComponents,
+    CreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import{ShelfsService} from '../services/shelfs.service';
     DynamicDialogModule,
     HttpClientModule,
     FormsModule,
-    TableModule
+    TableModule,
+    CardModule
   
   ],
   providers: [WarehouseService,ShelfsService],

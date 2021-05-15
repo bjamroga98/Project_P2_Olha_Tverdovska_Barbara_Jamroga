@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="p-grid p-fluid">
+        <div style="width: 100%; display: flex;">
+            <div class="p-col-12 p-md-3 input-wrap">
+                <input type="text" pInputText pTooltip="Nazwa regału"tooltipPosition="bottom" placeholder="Nazwa regału" [disabled]="disabledName" [ngModel]="name" (ngModelChange)="nameOnchange($event)">                
+            </div>
+            <div class="p-col-12 p-md-3 input-wrap">
+                <input type="text" pInputText pTooltip="Długość" tooltipPosition="bottom" placeholder="Długość" [disabled]="disabled">
+            </div>
+            <div class="p-col-12 p-md-3 input-wrap">
+                <input type="text" pInputText pTooltip="Szerokość" tooltipPosition="bottom" placeholder="Szerokość" [disabled]="disabled">
+            </div>
+            <div class="p-col-12 p-md-3 input-wrap">
+                <input type="text" pInputText pTooltip="Współrzędna x" tooltipPosition="bottom" placeholder="Współrzędna x" [disabled]="disabled">
+            </div>
+            <div class="p-col-12 p-md-3 input-wrap">
+                <input type="text" pInputText pTooltip="Współrzędna y" tooltipPosition="bottom" placeholder="Współrzędna y" [disabled]="disabled">
+            </div>
+        </div>
+            <div style="width: max-content;display: flex;">
+                <p-button class="edit-button" icon="pi pi-plus" styleClass="p-button-outlined" (click)="create()"></p-button>
+                <p-button class="edit-button" icon="pi pi-refresh" styleClass="p-button-outlined p-button-info" (click)="update()"></p-button>
+                <p-button class="edit-button" icon="pi pi-save" styleClass="p-button-outlined p-button-success"></p-button>
+                <p-button class="edit-button" icon="pi pi-times" styleClass="p-button-outlined p-button-danger" (click)="cancel()"></p-button>
+            </div>
+
+    </div> 
+    <p class="error"></p>
+    <canvas class="map" #canvas height="700" width="1500">
+
+
+    </canvas>
+</div>

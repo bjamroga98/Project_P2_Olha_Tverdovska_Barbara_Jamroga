@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
       this.items = [
           {label: 'Mapa', icon: 'pi pi-fw pi-map', routerLink: '/'},
+          {label:'Kreator', icon:'pi pi-fw pi-palette', routerLink:'creator'},
           {label: 'Profil', icon: 'pi pi-fw pi-user'},
           {label: 'Zamwienia', icon: 'pi pi-fw pi-tag'},
           {label: 'Artukuły', icon: 'pi pi-fw pi-shopping-cart', routerLink: 'products'},

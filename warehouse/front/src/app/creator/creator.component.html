@@ -2,31 +2,32 @@
     <div class="p-grid p-fluid">
         <div style="width: 100%; display: flex;">
             <div class="p-col-12 p-md-3 input-wrap">
-                <input type="text" pInputText pTooltip="Nazwa regału"tooltipPosition="bottom" placeholder="Nazwa regału" [disabled]="disabledName" [ngModel]="name" (ngModelChange)="nameOnchange($event)">                
+                <input type="text" pInputText pTooltip="Nazwa regału"tooltipPosition="bottom" placeholder="Nazwa regału" [disabled]="disabledName" (input)="newShelf.name=getValueFromInputs($event)" [(ngModel)]="newShelf.name" (ngModelChange)="onChange($event)">                
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
-                <input type="text" pInputText pTooltip="Długość" tooltipPosition="bottom" placeholder="Długość" [disabled]="disabled">
+                <input type="text" pInputText pTooltip="Długość" tooltipPosition="bottom" placeholder="Długość" [disabled]="disabled"  (input)="newShelf.height=getValueFromInputs($event)" [(ngModel)]="newShelf.height" (ngModelChange)="onChange($event)">
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
-                <input type="text" pInputText pTooltip="Szerokość" tooltipPosition="bottom" placeholder="Szerokość" [disabled]="disabled">
+                <input type="text" pInputText pTooltip="Szerokość" tooltipPosition="bottom" placeholder="Szerokość" [disabled]="disabled"  (input)="newShelf.width=getValueFromInputs($event)" [(ngModel)]="newShelf.width" (ngModelChange)="onChange($event)">
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
-                <input type="text" pInputText pTooltip="Współrzędna x" tooltipPosition="bottom" placeholder="Współrzędna x" [disabled]="disabled">
+                <input type="text" pInputText pTooltip="Współrzędna x" tooltipPosition="bottom" placeholder="Współrzędna x" [disabled]="disabled"   (input)="newShelf.x=getValueFromInputs($event)" [(ngModel)]="newShelf.x" (ngModelChange)="onChange($event)">
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
-                <input type="text" pInputText pTooltip="Współrzędna y" tooltipPosition="bottom" placeholder="Współrzędna y" [disabled]="disabled">
+                <input type="text" pInputText pTooltip="Współrzędna y" tooltipPosition="bottom" placeholder="Współrzędna y" [disabled]="disabled"   (input)="newShelf.y=getValueFromInputs($event)"[(ngModel)]="newShelf.y" (ngModelChange)="onChange($event)">
             </div>
         </div>
             <div style="width: max-content;display: flex;">
-                <p-button class="edit-button" icon="pi pi-plus" styleClass="p-button-outlined" (click)="create()"></p-button>
-                <p-button class="edit-button" icon="pi pi-refresh" styleClass="p-button-outlined p-button-info" (click)="update()"></p-button>
-                <p-button class="edit-button" icon="pi pi-save" styleClass="p-button-outlined p-button-success"></p-button>
-                <p-button class="edit-button" icon="pi pi-times" styleClass="p-button-outlined p-button-danger" (click)="cancel()"></p-button>
+                <p-button class="edit-button" icon="pi pi-plus" styleClass="p-button-outlined" (click)="create()" [hidden] = "mainButtonVisible"></p-button>
+                <p-button class="edit-button" icon="pi pi-pencil" styleClass="p-button-outlined p-button-info" (click)="update()" [hidden] = "mainButtonVisible"></p-button>
+                <p-button class="edit-button" icon="pi pi-save" styleClass="p-button-outlined p-button-success" [hidden] = "editButtonVisible" (click)="save()"></p-button>
+                <p-button class="edit-button" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger" (click)="delete()" [hidden] = "mainButtonVisible"></p-button>
+                <p-button class="edit-button" icon="pi pi-arrow-left" styleClass="p-button-outlined p-button-help" [hidden] = "editButtonVisible" (click)="cancel()" ></p-button>
             </div>
 
     </div> 
     <p class="error"></p>
-    <canvas class="map" #canvas height="700" width="1500">
+    <canvas class="map" #canvas height="700" width="1500" >
 
 
     </canvas>

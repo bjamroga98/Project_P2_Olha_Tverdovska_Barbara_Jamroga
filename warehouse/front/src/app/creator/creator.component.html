@@ -11,7 +11,7 @@
                 <input type="text" pInputText pTooltip="Szerokość" tooltipPosition="bottom" placeholder="Szerokość" [disabled]="disabled"  (input)="newShelf.width=getValueFromInputs($event)" [(ngModel)]="newShelf.width" (ngModelChange)="onChange($event)">
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
-                <input type="text" pInputText pTooltip="Współrzędna x" tooltipPosition="bottom" placeholder="Współrzędna x" [disabled]="disabled"   (input)="newShelf.x=getValueFromInputs($event)" [(ngModel)]="newShelf.x" (ngModelChange)="onChange($event)">
+                <input type="text" pInputText pTooltip="Współrzędna x" tooltipPosition="bottom" placeholder="Współrzędna x" [disabled]="disabled"   (input)="newShelf.x=getValueFromInputs($event)" [(ngModel)]="newShelf.x" value="{{newShelf.x}}" (ngModelChange)="onChange($event)">
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
                 <input type="text" pInputText pTooltip="Współrzędna y" tooltipPosition="bottom" placeholder="Współrzędna y" [disabled]="disabled"   (input)="newShelf.y=getValueFromInputs($event)"[(ngModel)]="newShelf.y" (ngModelChange)="onChange($event)">
@@ -27,7 +27,7 @@
 
     </div> 
     <p class="error"></p>
-    <canvas class="map" #canvas height="700" width="1500" >
+    <canvas class="map" #canvas height="700" width="1500" (mousedown) = getCoordinates($event)>
 
 
     </canvas>

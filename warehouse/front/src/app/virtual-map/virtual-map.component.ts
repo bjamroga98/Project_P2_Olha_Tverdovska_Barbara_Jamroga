@@ -46,7 +46,7 @@ export class VirtualMapComponent implements OnInit {
     this.shelfsServise.getShelfs().subscribe((data:any [])=> {
       shelfs = data.values;
       shelfs.forEach(element => {
-        const shelfs = new Shelf(this.ctx, element.SLF_COLOR, element.SLF_CRD_X, element.SLF_CRD_Y, element.SLF_WIDTH, element.SLF_HEIGHT, element.SLF_NAME);
+        const shelfs = new Shelf(this.ctx, element.SLF_NAME,element.SLF_COLOR, element.SLF_CRD_X, element.SLF_CRD_Y, element.SLF_WIDTH, element.SLF_HEIGHT);
         shelfs.draw()
       });
     })

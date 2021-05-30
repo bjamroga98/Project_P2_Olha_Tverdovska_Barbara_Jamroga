@@ -10,15 +10,16 @@ export class Shelf{
     public name(name:string):void{
         this.ctx.textAlign = "center"
         this.ctx.textBaseline = "middle"
-        this.ctx.fillStyle = 'black';
-        this.ctx.font = "20px Arial";
+        this.ctx.fillStyle = 'white';
+        if (this.width < 140 ){
+
+            this.ctx.font = (this.width / 7) +  "px Arial"; 
+        }else{
+            this.ctx.font = "20px Arial";
+        }
         const x :number = +(this.x) + (this.width/2) 
         const y: number = + (this.y) + (this.height/2)
         this.ctx.fillText(name,x,y);
-
-        if (this.shelfName == 'RHY768564'){
-            console.log(this.y + "y polki ,", this.height/2 + "pol szyrokoci ", y + ",suma" )
-        }
         
     }
 }

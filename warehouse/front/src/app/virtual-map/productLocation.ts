@@ -10,7 +10,9 @@ export class ProductLocation{
     private name():void{
         this.ctx.fillStyle = 'white';
         this.ctx.font = "20px Arial";
-        this.ctx.fillText(this.shelfName,this.x+35,this.y+this.height/2+8);
+        const x :number = +(this.x) + (this.width/2) 
+        const y: number = + (this.y) + (this.height/2)
+        this.ctx.fillText(this.shelfName,x,y);
     }
     public draw2(x:number, y:number, width:number, height:number):void {
         this.ctx.fillStyle = this.color;

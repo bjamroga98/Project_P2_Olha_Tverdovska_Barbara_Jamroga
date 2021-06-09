@@ -1,7 +1,6 @@
 'use strict'
 
 module.exports = (app) => {
-    const indexController = require('../../back/Controller/IndexController')
     const usersController = require('../Controller/UserController')
     const shelfController = require('../Controller/ShelfController')
     const productController = require('../Controller/ProductsController')
@@ -21,4 +20,13 @@ module.exports = (app) => {
     app
         .route('/api/products')
         .get(productController.getAllProducts)
+    app
+        .route('/api/shelfs/update')
+        .post(shelfController.updateShelfs)
+    app
+        .route('/api/shelfs/add')
+        .post(shelfController.addShelf)
+    app
+        .route('/api/shelfs/delete/:name')
+        .delete(shelfController.deleteShelf)
 }

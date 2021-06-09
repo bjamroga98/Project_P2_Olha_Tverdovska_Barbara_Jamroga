@@ -17,9 +17,11 @@ export class CreatorComponent implements OnInit {
   
   disabledName: boolean = true;
   disabled: boolean = true;
+  disabledSave:boolean = true;
 
   mainButtonVisible:boolean = false;
   editButtonVisible:boolean = true;
+  originalColor:string;
 
   editedShelfs:any;
 
@@ -50,8 +52,6 @@ export class CreatorComponent implements OnInit {
 
   drawShelfs():void{
       this.editedShelfs.forEach(element => {
-        if (element.SLF_NAME == 'RHY768564'){
-        }
         const shelfs = new Shelf(this.ctx, element.SLF_NAME,element.SLF_COLOR, element.SLF_CRD_X, element.SLF_CRD_Y, element.SLF_WIDTH, element.SLF_HEIGHT);
         shelfs.draw()
       });
@@ -59,11 +59,21 @@ export class CreatorComponent implements OnInit {
 
   create():void{
     this.disabledName = false;
-    this.disabled = false;
 
     this.displayEditButton()
 
     this.newShelf.action = 'create'
+    
+    this.editedShelfs.push({
+      SLF_COLOR: this.editedShelfs[this.editedShelfs.length - 1].SLF_COLOR,
+      ID : this.editedShelfs[this.editedShelfs.length - 1].ID + 1,
+      SLF_NAME: null,
+      SLF_CRD_X : null,
+      SLF_CRD_Y : null,
+      SLF_HEIGHT: null,
+      SLF_WIDTH: null
+    })
+
   }
 
   update():void{
@@ -95,15 +105,57 @@ export class CreatorComponent implements OnInit {
     this.disabledName = false;
     this.disabled = true;
 
-    this.displayMainButton()
+    this.displayEditButton()
   
     this.newShelf.action = 'delete'
   }
 
   save():void{
-    this.displayMainButton()
-    this.disabledName = true;
-    this.disabled = true;
+    if(this.disabledSave == false){
+      this.displayMainButton()
+      this.disabledName = true;
+      this.disabled = true; 
+  
+      if (this.newShelf.action == "update"){
+        this.editedShelfs.forEach(element => {
+          const shelf:Object = {
+            SLF_CRD_X : element.SLF_CRD_X,
+            SLF_CRD_Y : element.SLF_CRD_Y,
+            SLF_NAME :  element.SLF_NAME,
+            SLF_HEIGHT : element.SLF_HEIGHT,
+            SLF_WIDTH : element.SLF_WIDTH
+          }
+          this.shelfsServise.updateShelf(shelf).subscribe(
+            error => console.log(error)
+        )})
+      }else if (this.newShelf.action == "create"){
+          const shelf:Object = {
+            SLF_CRD_X : this.editedShelfs[this.editedShelfs.length - 1].SLF_CRD_X,
+            SLF_CRD_Y : this.editedShelfs[this.editedShelfs.length - 1].SLF_CRD_Y,
+            SLF_NAME :  this.editedShelfs[this.editedShelfs.length - 1].SLF_NAME,
+            SLF_COLOR :  this.editedShelfs[this.editedShelfs.length - 1].SLF_COLOR,
+            SLF_HEIGHT : this.editedShelfs[this.editedShelfs.length - 1].SLF_HEIGHT,
+            SLF_WIDTH : this.editedShelfs[this.editedShelfs.length - 1].SLF_WIDTH
+          }
+          this.shelfsServise.addShelf(shelf).subscribe(error => console.log(error));
+      }else if (this.newShelf.action == 'delete'){
+        console.log(this.newShelf.name)
+        if(this.newShelf.name == null){
+          console.log("Takiego regału nie istnieje")
+        }else{
+          this.shelfsServise.deleteShelf(this.newShelf.name).subscribe(error => {
+          })
+           this.getOriginalMap()
+        }
+      }
+        this.newShelf.action = null
+        this.newShelf.height = null
+        this.newShelf.name = null
+        this.newShelf.width = null 
+        this.newShelf.x = null
+        this.newShelf.y = null
+    }
+
   }
 
   getValueFromInputs(e):any{
@@ -112,6 +164,10 @@ export class CreatorComponent implements OnInit {
 
   onChange(e){
     if(this.newShelf.action == 'update'){
+      this.ifNameExist();
+    }else if (this.newShelf.action == 'create'){
+      this.createNewShelf()
+    }else if(this.newShelf.action == 'delete'){
       this.ifNameExist();
     }
   }
@@ -127,6 +183,55 @@ export class CreatorComponent implements OnInit {
   }
 
 
+  createNewShelf():void{
+    var pattern = /^[A-Z]{3}[1-9]{6}/;
+
+    if(pattern.test(this.newShelf.name)){
+
+      let correctName:boolean;
+      this.disabled = false;
+
+      let editedArray = this.editedShelfs.filter(el => {
+        return el.ID != this.editedShelfs[this.editedShelfs.length - 1].ID
+      });
+
+
+      editedArray.forEach(element => {
+
+        if(element.SLF_NAME == this.newShelf.name){
+          correctName = false
+        }
+      });
+
+      if(correctName == false){
+        console.log("taka nazwa już istnieje")
+        this.disabledSave = true
+      }else{
+        if (this.newShelf.height > 30 && this.newShelf.height != null && this.newShelf.width > 70 && this.newShelf.width != null &&this.newShelf.x >= 0 && this.newShelf.y >= 0){
+          this.editedShelfs[this.editedShelfs.length - 1].SLF_NAME = this.newShelf.name
+          this.editedShelfs[this.editedShelfs.length - 1].SLF_CRD_Y = parseInt(this.newShelf.y)
+          this.editedShelfs[this.editedShelfs.length - 1].SLF_CRD_X = parseInt(this.newShelf.x)
+          this.editedShelfs[this.editedShelfs.length - 1].SLF_HEIGHT = parseInt(this.newShelf.height)
+          this.editedShelfs[this.editedShelfs.length - 1].SLF_WIDTH = parseInt(this.newShelf.width)
+
+          if (this.checkShelfsPosition() == false){
+            console.log("mapa bledna")
+            this.disabledSave = true
+          }else {
+            console.log("super")
+            this.redrawMap()
+            this.disabledSave = false
+          }
+        }else{
+          console.log("Minimalna wysokość wynośi 30, szerokość 70 || X oraz Y ma być większy od 0 i mniejszy od 1000")
+          this.disabledSave = true
+        }
+      }
+
+
+    }
+  }
+
   ifNameExist():void{
     var pattern = /^[A-Z]{3}[1-9]{6}/;
 
@@ -134,7 +239,7 @@ export class CreatorComponent implements OnInit {
 
       this.editedShelfs.forEach(element => {
 
-        if(element.SLF_NAME == this.newShelf.name){
+        if(element.SLF_NAME == this.newShelf.name && this.newShelf.action == "update"){
 
           this.disabled = false
 
@@ -142,24 +247,36 @@ export class CreatorComponent implements OnInit {
 
             if (this.checkShelfsPosition() == false){
               console.log("mapa bledna")
-              console.log ( this.newShelf.height)
+              this.disabledSave = true
             }else {
               element.SLF_CRD_Y = parseInt(this.newShelf.y)
               element.SLF_CRD_X = parseInt(this.newShelf.x)
               element.SLF_HEIGHT = parseInt(this.newShelf.height)
               element.SLF_WIDTH = parseInt(this.newShelf.width)
               this.redrawMap()
-              console.log(this.editedShelfs)
+              this.disabledSave = false
             }
           }else{
             console.log("Minimalna wysokość wynośi 30, szerokość 70 || X oraz Y ma być większy od 0 i mniejszy od 1000")
+            this.disabledSave = true
           }
 
+        }else if(element.SLF_NAME == this.newShelf.name && this.newShelf.action == "delete"){
+          element.SLF_COLOR = "#dc3545"
+          this.redrawMap()
+          this.disabledSave = false
+        }
+        else{
+          element.SLF_COLOR = this.originalColor
+          this.redrawMap()
+          this.disabledSave = true
         }
       });
     }
     else{
       this.disabled = true
+      //this.disabledSave = true
+
     }
   }
 
@@ -210,6 +327,10 @@ export class CreatorComponent implements OnInit {
       this.newShelf.x = e.layerX
       this.newShelf.y = e.layerY
       this.ifNameExist()
+    }else if(this.newShelf.action == "create") {
+      this.newShelf.x = e.layerX
+      this.newShelf.y = e.layerY
+      this.createNewShelf()
     }
   }
 
@@ -222,6 +343,7 @@ export class CreatorComponent implements OnInit {
       this.editedShelfs = data.values;
        this.editedShelfs.forEach(element => {
          const shelfs = new Shelf(this.ctx, element.SLF_NAME, element.SLF_COLOR, element.SLF_CRD_X, element.SLF_CRD_Y, element.SLF_WIDTH, element.SLF_HEIGHT);
+         this.originalColor = element.SLF_COLOR
          shelfs.draw()
        });
  

@@ -42,7 +42,7 @@ exports.signup = (req, res) => {
                     response.status(200,{message: `Registration was successful`, results},res)
                 }
             })
-            console.log(req);
+            
         }
 
     })

@@ -9,7 +9,12 @@ export class ProductLocation{
 
     private name():void{
         this.ctx.fillStyle = 'white';
-        this.ctx.font = "20px Arial";
+        if (this.width < 140 ){
+
+            this.ctx.font = (this.width / 7) +  "px Arial"; 
+        }else{
+            this.ctx.font = "20px Arial";
+        }
         const x :number = +(this.x) + (this.width/2) 
         const y: number = + (this.y) + (this.height/2)
         this.ctx.fillText(this.shelfName,x,y);

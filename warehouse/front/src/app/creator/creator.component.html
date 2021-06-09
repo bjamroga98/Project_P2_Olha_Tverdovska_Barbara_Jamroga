@@ -20,7 +20,7 @@
             <div style="width: max-content;display: flex;">
                 <p-button class="edit-button" icon="pi pi-plus" styleClass="p-button-outlined" (click)="create()" [hidden] = "mainButtonVisible"></p-button>
                 <p-button class="edit-button" icon="pi pi-pencil" styleClass="p-button-outlined p-button-info" (click)="update()" [hidden] = "mainButtonVisible"></p-button>
-                <p-button class="edit-button" icon="pi pi-save" styleClass="p-button-outlined p-button-success" [hidden] = "editButtonVisible" (click)="save()"></p-button>
+                <p-button class="edit-button" icon="pi pi-save" styleClass="p-button-outlined p-button-success" [hidden] = "editButtonVisible" (click)="save()"  [disabled]="disabledSave" ></p-button>
                 <p-button class="edit-button" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger" (click)="delete()" [hidden] = "mainButtonVisible"></p-button>
                 <p-button class="edit-button" icon="pi pi-arrow-left" styleClass="p-button-outlined p-button-help" [hidden] = "editButtonVisible" (click)="cancel()" ></p-button>
             </div>

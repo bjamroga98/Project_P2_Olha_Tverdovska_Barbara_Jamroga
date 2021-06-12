@@ -2,6 +2,7 @@
 
 const response = require('./../response')
 const db = require('../Settings/db')
+const { json } = require('body-parser')
 
 exports.getAllShelfs = (req, res) => {
     db.query('SELECT * FROM `shelfs`', (error,rows,fields) =>{
@@ -66,7 +67,7 @@ exports.deleteShelf = (req,res) => {
         if(error){
             response.status(400,error,res)
         }else {
-            response.status(200,{message: `Delete was succesful`, results},res)
+            response.status(200,{message: `Delete was succesful`},res)
             //console.log(error);
         }
     })

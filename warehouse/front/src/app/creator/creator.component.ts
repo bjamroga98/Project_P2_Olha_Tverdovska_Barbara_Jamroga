@@ -19,6 +19,8 @@ export class CreatorComponent implements OnInit {
   disabled: boolean = true;
   disabledSave:boolean = true;
 
+  isButtonsVisible = false
+
   mainButtonVisible:boolean = false;
   editButtonVisible:boolean = true;
   originalColor:string;
@@ -59,6 +61,7 @@ export class CreatorComponent implements OnInit {
 
   create():void{
     this.disabledName = false;
+    this.isButtonsVisible = true;
 
     this.displayEditButton()
 
@@ -78,6 +81,7 @@ export class CreatorComponent implements OnInit {
 
   update():void{
     this.disabledName = false
+    this.isButtonsVisible = true;
     this.displayEditButton()
 
     this.newShelf.action = 'update'
@@ -86,6 +90,7 @@ export class CreatorComponent implements OnInit {
   cancel():void{
     this.disabledName = true
     this.disabled = true
+    this.isButtonsVisible = false
 
     this.displayMainButton()
 
@@ -104,6 +109,7 @@ export class CreatorComponent implements OnInit {
   delete():void{
     this.disabledName = false;
     this.disabled = true;
+    this.isButtonsVisible = true;
 
     this.displayEditButton()
   
@@ -111,10 +117,12 @@ export class CreatorComponent implements OnInit {
   }
 
   save():void{
-    if(this.disabledSave == false){
+    console.log(this.disabledSave)
+    if(!this.disabledSave){
       this.displayMainButton()
       this.disabledName = true;
       this.disabled = true; 
+      this.isButtonsVisible = false
   
       if (this.newShelf.action == "update"){
         this.editedShelfs.forEach(element => {
@@ -233,7 +241,7 @@ export class CreatorComponent implements OnInit {
   }
 
   ifNameExist():void{
-    var pattern = /^[A-Z]{3}[1-9]{6}/;
+    var pattern = /^[A-Z]{3}[1-9]{6}$/;
 
     if(pattern.test(this.newShelf.name)){
 
@@ -249,12 +257,12 @@ export class CreatorComponent implements OnInit {
               console.log("mapa bledna")
               this.disabledSave = true
             }else {
+              this.disabledSave = false
               element.SLF_CRD_Y = parseInt(this.newShelf.y)
               element.SLF_CRD_X = parseInt(this.newShelf.x)
               element.SLF_HEIGHT = parseInt(this.newShelf.height)
               element.SLF_WIDTH = parseInt(this.newShelf.width)
               this.redrawMap()
-              this.disabledSave = false
             }
           }else{
             console.log("Minimalna wysokość wynośi 30, szerokość 70 || X oraz Y ma być większy od 0 i mniejszy od 1000")
@@ -269,13 +277,12 @@ export class CreatorComponent implements OnInit {
         else{
           element.SLF_COLOR = this.originalColor
           this.redrawMap()
-          this.disabledSave = true
         }
       });
     }
-    else{
+    else if (!pattern.test(this.newShelf.name)){
       this.disabled = true
-      //this.disabledSave = true
+      this.disabledSave = true
 
     }
   }

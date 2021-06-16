@@ -15,6 +15,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
 //Components
 import { MenuComponent } from './menu/menu.component';
 //import { VirtualMapComponent } from './virtual-map/virtual-map.component';
@@ -24,6 +27,7 @@ import { MenuComponent } from './menu/menu.component';
 import{WarehouseService} from '../services/warehouse.service'
 import{ShelfsService} from '../services/shelfs.service';
 import { CreatorComponent } from './creator/creator.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
@@ -31,7 +35,8 @@ import { CreatorComponent } from './creator/creator.component';
     AppComponent,
     MenuComponent,
     RoutingComponents,
-    CreatorComponent
+    CreatorComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,10 @@ import { CreatorComponent } from './creator/creator.component';
     HttpClientModule,
     FormsModule,
     TableModule,
-    CardModule
+    CardModule,
+    MessageModule,
+    MessagesModule
+    //ToastModule
   
   ],
   providers: [WarehouseService,ShelfsService],

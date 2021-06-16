@@ -1,5 +1,6 @@
 <div class="container">
     <div class="p-grid p-fluid ">
+        <!-- <img src="../../assets/img/undraw_random_thoughts_xejj.svg" height="40px" [style.display]="isButtonsVisible ? 'none': 'block'"> -->
         <div style="width: 100%; display: flex;" [style.visibility]="isButtonsVisible ? 'visible' : 'hidden'">
             <div class="p-col-12 p-md-3 input-wrap p-field">
                 <span class="p-float-label">
@@ -10,13 +11,13 @@
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
                 <span class="p-float-label">
-                    <input type="text" pInputText pTooltip="Długość" tooltipPosition="bottom"[disabled]="disabled"  (input)="newShelf.height=getValueFromInputs($event)" [(ngModel)]="newShelf.height" (ngModelChange)="onChange($event)">
+                    <input type="text" pInputText pTooltip="Szerokość" tooltipPosition="bottom"[disabled]="disabled"  (input)="newShelf.height=getValueFromInputs($event)" [(ngModel)]="newShelf.height" (ngModelChange)="onChange($event)">
                     <label for="inputtext">Długość</label>
                 </span>
             </div>
             <div class="p-col-12 p-md-3 input-wrap">
                 <span class="p-float-label">
-                    <input type="text" pInputText pTooltip="Szerokość" tooltipPosition="bottom" [disabled]="disabled"  (input)="newShelf.width=getValueFromInputs($event)" [(ngModel)]="newShelf.width" (ngModelChange)="onChange($event)">
+                    <input type="text" pInputText pTooltip="Długość" tooltipPosition="bottom" [disabled]="disabled"  (input)="newShelf.width=getValueFromInputs($event)" [(ngModel)]="newShelf.width" (ngModelChange)="onChange($event)">
                     <label for="inputtext">Szerokość</label>
                 </span>
             </div>
@@ -43,4 +44,8 @@
 
         </div> 
     <canvas class="map" #canvas height="700" width="1500" (mousedown) = getCoordinates($event)></canvas>
+    
+    <p-messages [(value)]="msgs" severity="error" [showTransitionOptions]="'300ms'" [hideTransitionOptions]="'300ms'" class="error" [closable] = "false"></p-messages>
+
+
 </div>

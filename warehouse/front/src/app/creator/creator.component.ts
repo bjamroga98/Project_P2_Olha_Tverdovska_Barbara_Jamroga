@@ -25,6 +25,17 @@ export class CreatorComponent implements OnInit {
   editButtonVisible:boolean = true;
   originalColor:string;
 
+  msgs = []
+  hide() {
+    this.msgs = [];
+  }
+  show(error:object){
+    this.hide()
+    this.msgs.push(error);
+    setTimeout(this.hide, 3000);
+  }
+
+
   editedShelfs:any;
 
   newShelf = {
@@ -37,9 +48,11 @@ export class CreatorComponent implements OnInit {
   }
 
   constructor(private shelfsServise : ShelfsService) { }
+  
 
   ngOnInit(): void {
     this.getOriginalMap();
+    //this.show({severity:'error', summary:'Wystąpił błąd', detail:'Mapa błędna'})
   }
 
   drawExits():void{
@@ -149,11 +162,14 @@ export class CreatorComponent implements OnInit {
       }else if (this.newShelf.action == 'delete'){
         console.log(this.newShelf.name)
         if(this.newShelf.name == null){
+          this.show({severity:'error', summary:'Wystąpił błąd', detail:'Niepoprawna nazwa'})
           console.log("Takiego regału nie istnieje")
         }else{
+          
           this.shelfsServise.deleteShelf(this.newShelf.name).subscribe(error => {
           })
-           this.getOriginalMap()
+
+          setTimeout( a=> this.getOriginalMap(), 500)
         }
       }
         this.newShelf.action = null
@@ -213,6 +229,7 @@ export class CreatorComponent implements OnInit {
 
       if(correctName == false){
         console.log("taka nazwa już istnieje")
+        this.show({severity:'error', summary:'Wystąpił błąd', detail:'Nazwa już istnieje'})
         this.disabledSave = true
       }else{
         if (this.newShelf.height > 30 && this.newShelf.height != null && this.newShelf.width > 70 && this.newShelf.width != null &&this.newShelf.x >= 0 && this.newShelf.y >= 0){
@@ -224,6 +241,7 @@ export class CreatorComponent implements OnInit {
 
           if (this.checkShelfsPosition() == false){
             console.log("mapa bledna")
+            this.show({severity:'error', summary:'Wystąpił błąd', detail:'Mapa błędna'})
             this.disabledSave = true
           }else {
             console.log("super")
@@ -233,6 +251,7 @@ export class CreatorComponent implements OnInit {
         }else{
           console.log("Minimalna wysokość wynośi 30, szerokość 70 || X oraz Y ma być większy od 0 i mniejszy od 1000")
           this.disabledSave = true
+          this.showError()
         }
       }
 
@@ -256,6 +275,7 @@ export class CreatorComponent implements OnInit {
             if (this.checkShelfsPosition() == false){
               console.log("mapa bledna")
               this.disabledSave = true
+              this.show({severity:'error', summary:'Wystąpił błąd', detail:'Mapa błędna'})
             }else {
               this.disabledSave = false
               element.SLF_CRD_Y = parseInt(this.newShelf.y)
@@ -267,6 +287,8 @@ export class CreatorComponent implements OnInit {
           }else{
             console.log("Minimalna wysokość wynośi 30, szerokość 70 || X oraz Y ma być większy od 0 i mniejszy od 1000")
             this.disabledSave = true
+            this.showError()
+        
           }
 
         }else if(element.SLF_NAME == this.newShelf.name && this.newShelf.action == "delete"){
@@ -308,6 +330,7 @@ export class CreatorComponent implements OnInit {
       || (this.newShelf.x > parseInt(element.SLF_CRD_X )+ parseInt(element.SLF_WIDTH))
       || ( parseInt(this.newShelf.y) + parseInt(this.newShelf.height) < element.SLF_CRD_Y)
       || (this.newShelf.y > parseInt(element.SLF_CRD_Y + element.SLF_HEIGHT))){
+        this.hide()
     }
     else {
       correct = false
@@ -319,6 +342,7 @@ export class CreatorComponent implements OnInit {
       || (this.newShelf.x > element.xPosition + element.width)
       || ( parseInt(this.newShelf.y) + parseInt(this.newShelf.height) < element.yPosition)
       || (this.newShelf.y > element.yPosition + element.height)){
+        this.hide()
     }
     else {
       correct = false
@@ -358,7 +382,24 @@ export class CreatorComponent implements OnInit {
 
   }
 
-
-
+  showError():void{
+    if(this.newShelf.width< 30 && this.newShelf.height != null){
+      this.show({severity:'error', summary:'Wystąpił błąd', detail:'Minimalna szerokość 31'})
+    }else if (this.newShelf.height< 71){
+      this.show({severity:'error', summary:'Wystąpił błąd', detail:'Minimalna długość 71'})
+    }
+    else if (this.newShelf.x >= 1){
+      this.show({severity:'error', summary:'Wystąpił błąd', detail:'X nie może być mniejszy 1'})
+    }
+    else if (this.newShelf.y >= 1){
+      this.show({severity:'error', summary:'Wystąpił błąd', detail:'Y nie może być mniejszy 1'})
+    }else{
+      this.show({severity:'error', summary:'Wystąpił błąd', detail:'Minimalna szerokość 31'})
+      console.log(this.msgs)
+    }
+     
+   }
 
 }
+
+

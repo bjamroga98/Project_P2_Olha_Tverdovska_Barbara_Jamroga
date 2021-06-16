@@ -3,5 +3,5 @@ module.exports = {
     PORT: 3500 ,
     DBUSER: 'root' ,
     DBPASSWORD: '',
-    DBNAME: 'warehouse'
+    DBNAME: 'warehouse_2'
 }
